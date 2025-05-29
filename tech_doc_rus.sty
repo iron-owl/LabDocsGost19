@@ -1,0 +1,151 @@
+\ProvidesPackage{tech_doc_rus}
+%%%%%%% Version 2021052501
+%%%%%%% Title Page Options
+\usepackage{titlepic} % Add a logo picture
+%\titlepic{\includegraphics[width=4cm]{mstuca_logo}} % MSTUCA Logo
+%\titlepic{\includegraphics[width=4cm]{obs_logo}} % Orange Business Services Logo
+
+%%%%%%% языки
+%%\usepackage[utf8]{inputenc} % Add UTF8 Support
+%%\usepackage[russian]{babel} % Add Russian Language Support
+%%\usepackage[english]{babel} % Add English Language Support
+%%\usepackage[cp1251]{inputenc} % Add Russian Language Support - CHCP1251
+\usepackage{hyperref}
+\usepackage[warn]{mathtext}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[cp1251]{inputenc} % Add Russian Language Support - CHCP1251
+\usepackage[russian]{babel} % Add Russian Language Support
+\usepackage[english]{babel} % Add English Language Support
+\DeclareSymbolFont{T2Aletters}{T2A}{cmr}{m}{it}
+
+ %%%%%%% математика
+\usepackage{amssymb,amsfonts,amsmath,amsthm} % математические дополнения от АМС
+%\usepackage[T2A]{fontenc}
+%\usepackage[utf8]{inputenc}
+%\usepackage[warn]{mathtext}  % поддержка русского в формулах, стрелки с надписью над ними
+%\DeclareSymbolFont{T2Aletters}{T2A}{cmr}{m}{it}
+
+%%%%%%%Математические операторы (определения)
+\DeclareMathOperator{\rot}{rot}
+\DeclareMathOperator{\divsymb}{div}
+\DeclareMathOperator{\grad}{grad}
+\DeclareMathOperator{\cov}{cov}
+\DeclareMathOperator{\const}{const}
+
+ %%%%%%% Форматирование страницы
+ 
+\usepackage{geometry} % пакет для установки полей
+\geometry{top=2cm} % отступ сверху
+\geometry{bottom=2cm} % отступ снизу
+\geometry{left=3cm} % отступ справа
+\geometry{right=1cm} % отступ слева
+\usepackage{setspace} % установка интервала междутекстового
+\onehalfspacing %полуторный интервал
+\setlength{\parindent}{1.25cm} %абзацный отступ (красная строка) 1,25
+\usepackage{indentfirst} % отделять первую строку раздела абзацным отступом тоже
+
+%%%%%%% Опции по работе с символами
+
+%\usepackage{ulem} % подчеркивания
+\usepackage[normalem]{ulem} %подчёркивание, но загрузка без normalem приводит к проблеме при работе biblatex
+%\usepackage{hyperref}
+%\usepackage[warn]{mathtext}  % поддержка русского в формулах
+%\DeclareSymbolFont{T2Aletters}{T2A}{cmr}{m}{it}
+%\usepackage[utf8]{inputenc} % Включаем поддержку UTF8 
+
+\usepackage{lscape} %для поворота страниц
+\usepackage{rotating}%для поворота таблиц и рисунков
+\usepackage{ccaption} % для работы с подписями плавающих объектов
+
+%%%%%%% ссылки
+\usepackage[unicode]{hyperref} %оглавление - гиперссылки
+\usepackage{url}% чтобы отображались url-ссылки 
+%\usepackage{hyperref}
+\def\UrlBreaks{\do\/\do-}
+
+%%%%%%% Определения теорем, определений, лемм
+\newtheorem{theorem}{Теорема}[section]
+\theoremstyle{definition}
+\newtheorem{definition}{Опр.}[section]
+\theoremstyle{lemma}
+\newtheorem{lemma}{Лемма}[section]
+
+%%%%%%% графика
+\usepackage{graphicx} % для вставки картинок
+\usepackage{subfigure} %подключаем сабфигуры
+\usepackage[usenames,dvipsnames]{color} % названия цветов
+
+%%%%%%% Вставка векторных рисунков из Inkscape
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+\newcommand{\incfig}[2]{%
+    \def\svgwidth{#1}
+    \import{\graphicpath}{#2.pdf_tex}
+}
+%%%%%%% Вставка графиков из gnuplot (pict2e)
+\usepackage{pict2e}
+
+%%%%%%% Inserting tikz graphic
+\usepackage{tikz}
+\usetikzlibrary{positioning,shapes,shadows,arrows}
+\usepackage{pgfplots}
+
+%%%%%%% таблицы
+\usepackage{multirow} % улучшенное форматирование таблиц
+\usepackage{longtable} % поддержка длинных таблиц
+\usepackage{multicol} % поддержка объединения ячеек
+%\usepackage{makecell} % для работы с таблицами, мне пригодилось, чтобы выделять цветом ячейки
+%\captiondelim{. } % заменяем для рисунков ’ : ’ после номера рисунка на ’ . ’
+\usepackage[normalem]{ulem} % для подчёркиваний uline
+
+%%%%%%% патч для оформления рисунков и таблиц по ГОСТ
+\usepackage[tableposition=top]{caption}
+\usepackage[format=hang,singlelinecheck=false, justification=justified, tableposition=top]{caption}
+\usepackage{subcaption}
+\usepackage{float}
+\DeclareCaptionLabelFormat{gostfigure}{Рис. #2}
+\DeclareCaptionLabelFormat{gosttable}{Табл. #2}
+\DeclareCaptionLabelSeparator{gost}{.~}
+\captionsetup{labelsep=gost}
+\captionsetup*[figure]{labelformat=gostfigure}
+\captionsetup*[table]{labelformat=gosttable}
+\renewcommand{\thesubfigure}{\asbuk{subfigure}} % чтобы были русские буквы
+
+%%%%%%% Работа с листингами
+\usepackage{listings}
+\lstset{ 
+  numbers=left,                   % С какой стороны нумеровать
+  stepnumber=1,                   % Шаг между линиями. Если 1, то будет пронумерована каждая строка 
+  numbersep=5pt,                  
+  showspaces=false,               
+  showstringspaces=false,         
+  showtabs=false,                
+  frame=single,                    % Добавить рамку
+  tabsize=2,                       % Tab - 2 пробела
+  breaklines=true,                 % Автоматический перенос строк
+  keepspaces=true,
+  extendedchars=\true,
+  texcl=true,
+}
+
+%патч для настройки нумерации объектов
+\numberwithin{equation}{section} % нумерация формул с номером раздела
+\numberwithin{figure}{section} % нумерация рисунков с номером раздела
+\numberwithin{table}{section} % нумерация таблиц с номером раздела
+
+%%%%%%% Bibliography management
+\bibliographystyle{gost780} % BibTeX Style file for making bibliography list in compliance with gost780
+
+%%%% Packages for BibLaTeX+Biber
+\usepackage{csquotes}
+\usepackage[backend=biber,style=gost-numeric,sorting=none]{biblatex}
+
+%%%%%Packages for list of abbreviations
+\usepackage[russian]{nomencl}
+
+%\renewcommand\contentsname{Содержание} %%% renaming the Table of Contents
+%\renewcommand{\nomname}{Обозначения и сокращения}
+%\renewcommand{nomname}{Обозначения и сокращения}
